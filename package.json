@@ -1,0 +1,17 @@
+{
+  "name": "handler",
+  "version": "2.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "KabirSingh",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.3.0",
+    "mongoose": "^6.0.12",
+    "reconlx": "^2.5.1"
+  }
+}

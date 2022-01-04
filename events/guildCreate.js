@@ -1,6 +1,4 @@
 const client = require("../index");
-const ee = require("../settings/embed.json");
-const emoji = require("../settings/emoji.json");
 const { MessageEmbed } = require("discord.js");
 
 client.on("guildCreate", async (guild) => {

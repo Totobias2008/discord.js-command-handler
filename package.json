@@ -1,6 +1,6 @@
 {
   "name": "handler",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,9 @@
   "author": "KabirSingh",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.3.0",
-    "mongoose": "^6.0.12",
-    "reconlx": "^2.5.1"
+    "chalk": "^4.1.2",
+    "discord.js": "^13.6.0",
+    "mongoose": "^6.1.6",
+    "reconlx": "^2.5.2"
   }
 }

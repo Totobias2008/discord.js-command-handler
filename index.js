@@ -1,4 +1,4 @@
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents } = require("discord.js");
 const fs = require("fs");
 const client = new Client({
   messageCacheLifetime: 60,
@@ -33,37 +33,40 @@ const client = new Client({
 module.exports = client;
 
 const config = require("./settings/config.json");
-const ee = require("./settings/embed.json");
-const prefix = config.prefix;
-const token = config.token;
 // Global Variables
 client.events = new Collection();
 client.cooldowns = new Collection();
-client.Commands = new Collection();
-client.categories = fs.readdirSync("./Commands/");
+client.commands = new Collection();
+client.categories = fs.readdirSync("./commands/");
 
 // Initializing the project
 //Loading files, with the client variable like Command Handler, Event Handler, ...
 ["event_handler", "slash_handler"].forEach((handler) => {
-    require(`./handlers/${handler}`)(client)
+  require(`./handlers/${handler}`)(client);
 });
 
-client.login(token);
+// // database connection
+// const mongoose = require('mongoose')
+// mongoose.connect(`Mongo_URL`)
+// .then(m =>{
+//   console.log(`Database Connected ..`)
+// })
 
+client.login(config.token);
 
-process.on('unhandledRejection', (reason, p) => {
-    console.log(' [Error_Handling] :: Unhandled Rejection/Catch');
-    console.log(reason, p);
-});
-process.on("uncaughtException", (err, origin) => {
-    console.log(' [Error_Handling] :: Uncaught Exception/Catch');
-    console.log(err, origin);
-})
-process.on('uncaughtExceptionMonitor', (err, origin) => {
-    console.log(' [Error_Handling] :: Uncaught Exception/Catch (MONITOR)');
-    console.log(err, origin);
-});
-process.on('multipleResolves', (type, promise, reason) => {
-    console.log(' [Error_Handling] :: Multiple Resolves');
-    console.log(type, promise, reason);
-});
+// process.on("unhandledRejection", (reason, p) => {
+//   console.log(" [Error_Handling] :: Unhandled Rejection/Catch");
+//   console.log(reason, p);
+// });
+// process.on("uncaughtException", (err, origin) => {
+//   console.log(" [Error_Handling] :: Uncaught Exception/Catch");
+//   console.log(err, origin);
+// });
+// process.on("uncaughtExceptionMonitor", (err, origin) => {
+//   console.log(" [Error_Handling] :: Uncaught Exception/Catch (MONITOR)");
+//   console.log(err, origin);
+// });
+// process.on("multipleResolves", (type, promise, reason) => {
+//   console.log(" [Error_Handling] :: Multiple Resolves");
+//   console.log(type, promise, reason);
+// });

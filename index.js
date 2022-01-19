@@ -15,7 +15,7 @@ const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_BANS,
+    // Intents.FLAGS.GUILD_BANS,
     Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
     //Intents.FLAGS.GUILD_INTEGRATIONS,
     //Intents.FLAGS.GUILD_WEBHOOKS,
@@ -29,13 +29,20 @@ const client = new Client({
     Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     //Intents.FLAGS.DIRECT_MESSAGE_TYPING
   ],
+  ws : {
+    properties : {
+      $browser : "Discord Android"
+    }
+  }
 });
 module.exports = client;
 
 const config = require("./settings/config.json");
+
 // Global Variables
 client.events = new Collection();
 client.cooldowns = new Collection();
+client.subcmd = new Collection();
 client.commands = new Collection();
 client.categories = fs.readdirSync("./commands/");
 
@@ -54,19 +61,19 @@ client.categories = fs.readdirSync("./commands/");
 
 client.login(config.token);
 
-// process.on("unhandledRejection", (reason, p) => {
-//   console.log(" [Error_Handling] :: Unhandled Rejection/Catch");
-//   console.log(reason, p);
-// });
-// process.on("uncaughtException", (err, origin) => {
-//   console.log(" [Error_Handling] :: Uncaught Exception/Catch");
-//   console.log(err, origin);
-// });
-// process.on("uncaughtExceptionMonitor", (err, origin) => {
-//   console.log(" [Error_Handling] :: Uncaught Exception/Catch (MONITOR)");
-//   console.log(err, origin);
-// });
-// process.on("multipleResolves", (type, promise, reason) => {
-//   console.log(" [Error_Handling] :: Multiple Resolves");
-//   console.log(type, promise, reason);
-// });
+process.on("unhandledRejection", (reason, p) => {
+  console.log(" [Error_Handling] :: Unhandled Rejection/Catch");
+  console.log(reason, p);
+});
+process.on("uncaughtException", (err, origin) => {
+  console.log(" [Error_Handling] :: Uncaught Exception/Catch");
+  console.log(err, origin);
+});
+process.on("uncaughtExceptionMonitor", (err, origin) => {
+  console.log(" [Error_Handling] :: Uncaught Exception/Catch (MONITOR)");
+  console.log(err, origin);
+});
+process.on("multipleResolves", (type, promise, reason) => {
+  console.log(" [Error_Handling] :: Multiple Resolves");
+  console.log(type, promise, reason);
+});

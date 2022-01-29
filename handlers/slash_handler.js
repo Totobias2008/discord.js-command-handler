@@ -17,10 +17,6 @@ const emoji = require("../settings/emoji.json");
 module.exports = async (client) => {
   try {
     client.arrayOfcommands = [];
-    let commandcount = 0;
-    console.log(chalk.green.bold("SLASH COMMANDS━━━━━━━━━━━━━━━━━━━┓"));
-    let cmdName;
-    let cmdOption;
     fs.readdirSync("./commands").forEach((cmd) => {
       let commands = fs
         .readdirSync(`./commands/${cmd}/`)
@@ -36,22 +32,12 @@ module.exports = async (client) => {
         }
         if (pull.name) {
           client.commands.set(pull.name, pull);
-          cmdName = pull.name;
-          cmdOption = "✅";
-          commandcount++;
           client.arrayOfcommands.push(pull);
         } else {
           continue;
         }
-        console.log(
-          `${chalk.green.bold("┃")} Loaded: ${cmdOption} ${chalk.green.bold(
-            "┃"
-          )} ${cmdName}`
-        );
       }
     });
-    console.log(chalk.green.bold("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"));
-
     client.on("ready", async () => {
       try {
         await client.guilds.cache
@@ -69,8 +55,6 @@ module.exports = async (client) => {
         console.log(e);
       }
     });
-
-    // console.log(` Loaded ${commandcount} commands `);
   } catch (e) {
     console.log(e);
   }

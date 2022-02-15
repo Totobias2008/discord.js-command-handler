@@ -1,6 +1,4 @@
 const client = require("../index");
-const ee = require("../settings/embed.json");
-const emoji = require("../settings/emoji.json");
 
 client.on("voiceStateUpdate", async (os, ns) => {
   if (!ns.guild || ns.member.user.bot) return;

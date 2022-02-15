@@ -1,9 +1,9 @@
-const { Command } = require(`reconlx`);
-const ee = require(`../../settings/embed.json`);
-const config = require(`../../settings/config.json`);
+const { Command } = require("../../utils/command/command");
+const ee = require(`../../settings/config`).embed
 const { MessageEmbed, version } = require(`discord.js`);
-const emoji = require(`../../settings/emoji.json`);
+const emoji = require(`../../settings/config`).emoji
 const { duration } = require(`../../handlers/functions`);
+
 
 module.exports = new Command({
   // options
@@ -65,7 +65,7 @@ module.exports = new Command({
               inline: true,
             },
             {
-              name: `${emoji.setup} Bot Commands`,
+              name: `${emoji.premium} Bot Commands`,
               value: `>>> \`\`\` Commands ${client.commands.size} , SubCommands ${client.subcmd.size}\`\`\``,
             },
             {

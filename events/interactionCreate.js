@@ -1,8 +1,5 @@
-const { MessageEmbed } = require("discord.js");
 const client = require("..");
 const { cooldown } = require("../handlers/functions");
-var config = require("../settings/config.json");
-var ee = require("../settings/embed.json");
 
 client.on("interactionCreate", async (interaction) => {
   // Slash Command Handling

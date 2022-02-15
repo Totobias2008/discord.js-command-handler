@@ -1,6 +1,5 @@
-const { Command } = require("reconlx");
-const ee = require("../../settings/embed.json");
-const config = require("../../settings/config.json");
+const { Command } = require("../../utils/command/command");
+const ee = require("../../settings/config").embed
 const { readdirSync } = require("fs");
 const { MessageEmbed } = require("discord.js");
 
@@ -54,7 +53,7 @@ module.exports = new Command({
         categories.push(data);
       });
 
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           new MessageEmbed()
             .setColor(ee.embed_color)
@@ -74,7 +73,7 @@ module.exports = new Command({
     } else {
       const command = client.commands.get(cmd.toLowerCase());
       if (!command) {
-        return interaction.reply(
+        return interaction.followUp(
           `:x: Inavlid Command , ${prefix}help to see all Commands`
         );
       } else {
@@ -113,7 +112,7 @@ module.exports = new Command({
             iconURL: interaction.member.displayAvatarURL({ dynamic: true }),
           });
 
-        interaction.reply({ embeds: [embed] });
+        interaction.followUp({ embeds: [embed] });
       }
     }
   },

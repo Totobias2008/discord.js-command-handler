@@ -1,6 +1,6 @@
-const { Command } = require("reconlx");
-const ee = require("../../settings/embed.json");
-const config = require("../../settings/config.json");
+const { Command } = require("../../utils/command/command");
+const ee = require("../../settings/config").embed
+const config = require("../../settings/config")
 
 module.exports = new Command({
   // options

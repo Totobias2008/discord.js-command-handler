@@ -29,37 +29,26 @@ const client = new Client({
     Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     //Intents.FLAGS.DIRECT_MESSAGE_TYPING
   ],
-  ws : {
-    properties : {
-      $browser : "Discord Android"
-    }
-  }
 });
 module.exports = client;
 
-const config = require("./settings/config.json");
+const { token } = require("./settings/config");
 
 // Global Variables
 client.events = new Collection();
 client.cooldowns = new Collection();
 client.subcmd = new Collection();
 client.commands = new Collection();
+client.mcommands = new Collection();
 client.categories = fs.readdirSync("./commands/");
 
 // Initializing the project
 //Loading files, with the client variable like Command Handler, Event Handler, ...
-["event_handler", "slash_handler"].forEach((handler) => {
+["event_handler", "slash_handler","cmd_handler"].forEach((handler) => {
   require(`./handlers/${handler}`)(client);
 });
 
-// // database connection
-// const mongoose = require('mongoose')
-// mongoose.connect(`Mongo_URL`)
-// .then(m =>{
-//   console.log(`Database Connected ..`)
-// })
-
-client.login(config.token);
+client.login(token);
 
 process.on("unhandledRejection", (reason, p) => {
   console.log(" [Error_Handling] :: Unhandled Rejection/Catch");

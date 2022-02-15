@@ -1,8 +1,6 @@
-const { Command } = require("reconlx");
-const ee = require("../../settings/embed.json");
-const config = require("../../settings/config.json");
+const { Command } = require("../../utils/command/command");
+const ee = require(`../../settings/config`).embed
 const { MessageEmbed } = require("discord.js");
-const emoji = require('../../settings/emoji.json')
 
 module.exports = new Command({
   // options

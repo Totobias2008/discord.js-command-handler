@@ -1,6 +1,5 @@
 const { Client } = require("discord.js");
 const fs = require("fs");
-const chalk = require("chalk");
 /**
  *
  * @param {Client} client
@@ -14,13 +13,13 @@ module.exports = (client) => {
         .filter((file) => file.endsWith(".js"));
       for (let file of events) {
         let pull = require(`../events/${file}`);
-        if (pull.name) {
-          client.events.set(pull.name, pull);
+        if (pull) {
+          client.events.set(file, pull);
         }
       }
-      console.log(chalk.gray.bold(`${file}  Events Loaded Successfullly`))
     });
+    console.log(`${client.events.size} Events Loaded`);
   } catch (e) {
-    console.log(e.message);
+    console.log(e);
   }
 };

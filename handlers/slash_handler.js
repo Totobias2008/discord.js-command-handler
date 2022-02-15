@@ -1,13 +1,6 @@
-const {
-  Client,
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
-  Guild,
-} = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const fs = require("fs");
-const ee = require("../settings/embed.json");
-const emoji = require("../settings/emoji.json");
+const ee = require(`../settings/config`).embed
 
 /**
  *
@@ -40,21 +33,19 @@ module.exports = async (client) => {
     });
     client.on("ready", async () => {
       try {
-        // await client.guilds.cache
-        //   .get(`YOUR_GUILD_ID`)
-        //   .commands.set(client.arrayOfcommands);
-        await client.application.commands
-          .set(client.arrayOfcommands)
-          .then((s) => {
-            console.log("Successfully reloaded application (/) commands.");
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        await client.guilds.fetch().catch((e) => {});
+        await client.guilds.cache.forEach(async (guild) => {
+          await guild.commands
+            .set(client.arrayOfcommands)
+            .catch((e) => {
+              console.log(e);
+            });
+        });
       } catch (e) {
         console.log(e);
       }
     });
+    console.log(`${client.commands.size} Commands Loaded`);
   } catch (e) {
     console.log(e);
   }
@@ -68,7 +59,7 @@ module.exports = async (client) => {
       embeds: [
         new MessageEmbed()
           .setColor(ee.color)
-          .setTitle(data.substr(0, 2000))
+          .setDescription(data.substr(0, 2000))
           .setFooter({
             text: ee.footertext,
             iconURL: ee.footericon,

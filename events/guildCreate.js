@@ -1,5 +1,4 @@
 const client = require("../index");
-const { MessageEmbed } = require("discord.js");
 
 client.on("guildCreate", async (guild) => {
   if (!guild) return;

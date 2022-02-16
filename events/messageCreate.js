@@ -1,8 +1,9 @@
 const client = require("..");
+const { cooldown } = require("../handlers/functions");
+const { prefix } = require("../settings/config");
 
 client.on("messageCreate", async (message) => {
   if (message.author.bot || !message.guild) return;
-  let prefix = "!";
   if (message.channel.partial) await message.channel.fetch();
   if (message.partial) await message.fetch();
   let mentionprefix = new RegExp(
@@ -15,12 +16,40 @@ client.on("messageCreate", async (message) => {
   }
   const args = message.content.slice(nprefix.length).trim().split(/ +/);
   const cmd = args.shift().toLowerCase();
-  const command = client.mcommands.get(cmd);
+  const command =
+    client.mcommands.get(cmd) ||
+    client.mcommands.find((cmds) => cmds.aliases && cmds.aliases.includes(cmd));
+  if (!command) return;
   if (command) {
-    if (message.author.id !== "882481863661342770") {
-      return message.reply(`Only For Owner`);
+    if (!message.member.permissions.has(command.userPermissions || [])) {
+      return message.reply({
+        embeds: [
+          new MessageEmbed()
+            .setColor(ee.color)
+            .setDescription(
+              `** ❌ You don't Have ${command.userPermissions} To Run Command.. **`
+            ),
+        ],
+      });
+    } else if (!message.member.permissions.has(command.botPermissions || [])) {
+      return message.reply({
+        embeds: [
+          new MessageEmbed()
+            .setColor(ee.color)
+            .setDescription(
+              `** ❌ I don't Have ${command.botPermissions} To Run Command.. **`
+            ),
+        ],
+      });
+    } else if (cooldown(message, command)) {
+      return message.channel.send(
+        `*You are On Cooldown , wait \`${cooldown(
+          message,
+          command
+        ).toFixed()}\` Seconds*`
+      );
     } else {
-      await command.run(client, message, args);
+      command.run(client, message, args, nprefix);
     }
   }
 });

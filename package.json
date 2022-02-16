@@ -1,6 +1,6 @@
 {
-  "name": "handler",
-  "version": "2.3.0",
+  "name": "djshandler",
+  "version": "3.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {

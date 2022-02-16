@@ -1,9 +1,8 @@
 const { Command } = require("../../utils/command/command");
-const ee = require(`../../settings/config`).embed
+const ee = require(`../../settings/config`).embed;
 const { MessageEmbed, version } = require(`discord.js`);
-const emoji = require(`../../settings/config`).emoji
+const emoji = require(`../../settings/config`).emoji;
 const { duration } = require(`../../handlers/functions`);
-
 
 module.exports = new Command({
   // options

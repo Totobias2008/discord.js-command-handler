@@ -1,6 +1,6 @@
 module.exports = {
-  token: "YOUR_BOT_TOKEN",
-  prefix : "!",
+  token: process.env.TOKEN || "YOUR_BOT_TOKEN",
+  prefix: process.env.PREFIX || "YOUR_BOT_PREFIX",
   embed: {
     color: "#2f3136",
     wrongcolor: "#2f3136",

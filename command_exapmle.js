@@ -1,8 +1,8 @@
 // slash command
 
 const { Command } = require("../../utils/command/command");
-const ee = require("../../settings/embed.json");
-const config = require("../../settings/config.json");
+const ee = require("../../settings/config").embed
+const emoji = require("../../settings/config").emoji
 
 module.exports = new Command({
   // options
@@ -20,6 +20,8 @@ module.exports = new Command({
 
 // message command aka prefix cmd
 const { Message, Client } = require("discord.js");
+const ee = require("../../settings/config").embed
+const emoji = require("../../settings/config").emoji
 
 module.exports = {
   name: "",

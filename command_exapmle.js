@@ -1,6 +1,6 @@
 // slash command
 
-const { Command } = require("reconlx");
+const { Command } = require("../../utils/command/command");
 const ee = require("../../settings/embed.json");
 const config = require("../../settings/config.json");
 
